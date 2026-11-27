@@ -1179,6 +1179,8 @@
     <div class="lightbox-inner"></div>
   </div>
 
+  <audio id="burst-sound" src="media/burst.mp4" preload="auto" aria-hidden="true"></audio>
+
   <script>
     (function () {
       document.getElementById("year").textContent = new Date().getFullYear();
@@ -1189,6 +1191,7 @@
       if (intro) {
         var introButton = intro.querySelector(".intro-enter");
         var burstLayer = intro.querySelector(".intro-burst");
+        var burstSound = document.getElementById("burst-sound");
         var svgNS = "http://www.w3.org/2000/svg";
         var pageParts = document.querySelectorAll(".skip, .nav, main, .footer, .sound-toggle");
 
@@ -1217,6 +1220,13 @@
           if (!intro || intro.classList.contains("done") || intro.classList.contains("exploding")) return;
           intro.classList.add("exploding");
           spawnBurst();
+
+          if (burstSound) {
+            burstSound.currentTime = 0;
+            burstSound.volume = 0.8;
+            var started = burstSound.play();
+            if (started && started.catch) started.catch(function () {});
+          }
 
           window.setTimeout(function () {
             if (!intro) return;
