@@ -9,7 +9,7 @@
 <link rel="preconnect" href="https://fonts.googleapis.com">
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
 <link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
-<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}#intro{display:none !important}</style></noscript>
 <style>
   *, *::before, *::after { box-sizing: border-box; }
 
@@ -781,6 +781,73 @@
     .work-meta { display: none; }
   }
 
+  /* Intro gate */
+  .intro {
+    position: fixed;
+    inset: 0;
+    z-index: 70;
+    display: grid;
+    place-items: center;
+    background:
+      radial-gradient(900px 620px at 50% 44%, #14305C 0%, rgba(20, 48, 92, 0) 62%),
+      var(--bg);
+    transition: opacity 0.6s ease, visibility 0.6s ease;
+  }
+  .intro.done {
+    opacity: 0;
+    visibility: hidden;
+    pointer-events: none;
+  }
+  .intro-enter {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 20px;
+    padding: 0;
+    border: 0;
+    background: none;
+    color: inherit;
+    font-family: var(--sans);
+    cursor: pointer;
+  }
+  .intro-enter:focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 14px;
+    border-radius: 6px;
+  }
+  .intro-art {
+    width: min(78vw, 560px);
+    height: auto;
+    transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .intro-enter:hover .intro-art { transform: scale(1.025); }
+  .intro-mono {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 176px;
+    fill: #EAF0FF;
+  }
+  .intro-label {
+    font-family: var(--sans);
+    font-size: 10px;
+    letter-spacing: 0.26em;
+    fill: #8CA0C6;
+  }
+  .intro-hint {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+  .intro-arcs,
+  .intro-dashes {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+  }
+  .intro-arcs { animation: orbit 64s linear infinite; }
+  .intro-dashes { animation: orbit-rev 92s linear infinite; }
+  .intro-pulse { animation: pulse 3.4s ease-in-out infinite; }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
@@ -794,6 +861,9 @@
     .art-arcs,
     .art-plus,
     .art-pulse,
+    .intro-arcs,
+    .intro-dashes,
+    .intro-pulse,
     .flash,
     .bolt { animation: none !important; }
   }
@@ -801,6 +871,25 @@
 </head>
 <body>
   <a class="skip" href="#main">Skip to content</a>
+
+  <div class="intro" id="intro">
+    <button class="intro-enter" type="button" aria-label="Open the website">
+      <svg class="intro-art" viewBox="0 0 460 460" aria-hidden="true">
+        <circle cx="230" cy="230" r="206" fill="none" stroke="#2B4878" stroke-width="1"/>
+        <g class="intro-arcs">
+          <circle cx="230" cy="230" r="188" fill="none" stroke="#EAF0FF" stroke-opacity="0.18" stroke-width="1.2" stroke-dasharray="160 1021" stroke-linecap="round"/>
+          <circle cx="230" cy="230" r="188" fill="none" stroke="#8FB8FF" stroke-opacity="0.6" stroke-width="1.2" stroke-dasharray="56 1125" stroke-linecap="round" transform="rotate(130 230 230)"/>
+        </g>
+        <g class="intro-dashes">
+          <circle cx="230" cy="230" r="160" fill="none" stroke="#8CA0C6" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="1.5 11" stroke-linecap="round"/>
+        </g>
+        <circle class="intro-pulse" cx="230" cy="24" r="4" fill="#8FB8FF"/>
+        <text class="intro-mono" x="230" y="244" text-anchor="middle" dominant-baseline="central">N<tspan fill="#8FB8FF">.</tspan></text>
+        <text class="intro-label" x="230" y="330" text-anchor="middle">NIRAV · 16 · 10TH CLASS</text>
+      </svg>
+      <span class="intro-hint">Click the N to enter</span>
+    </button>
+  </div>
 
   <div class="storm" aria-hidden="true">
     <div class="flash"></div>
@@ -1039,6 +1128,33 @@
   <script>
     (function () {
       document.getElementById("year").textContent = new Date().getFullYear();
+
+      var intro = document.getElementById("intro");
+      if (intro) {
+        var introButton = intro.querySelector(".intro-enter");
+        var pageParts = document.querySelectorAll(".skip, .nav, main, .footer, .sound-toggle");
+        document.body.classList.add("no-scroll");
+        pageParts.forEach(function (el) { el.inert = true; });
+        introButton.focus({ preventScroll: true });
+
+        var enterSite = function () {
+          if (!intro || intro.classList.contains("done")) return;
+          intro.classList.add("done");
+          pageParts.forEach(function (el) { el.inert = false; });
+          document.body.classList.remove("no-scroll");
+          window.setTimeout(function () {
+            if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+            intro = null;
+          }, 700);
+        };
+
+        intro.addEventListener("click", enterSite);
+        document.addEventListener("keydown", function (event) {
+          if (event.key === "Enter" || event.key === " " || event.key === "Escape") {
+            enterSite();
+          }
+        });
+      }
 
       var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
