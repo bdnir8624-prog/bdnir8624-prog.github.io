@@ -570,7 +570,8 @@
   .footer {
     max-width: var(--max);
     margin: 0 auto;
-    padding: 28px var(--pad) 42px;
+    /* extra bottom room so the fixed thunder toggle never covers the tagline */
+    padding: 28px var(--pad) 92px;
     border-top: 1px solid var(--line);
     display: flex;
     justify-content: space-between;
@@ -758,9 +759,9 @@
         <p class="eyebrow" data-reveal>Engineering student · 23</p>
         <h1 data-reveal>Hi, I'm <em>Ram</em>.</h1>
         <p class="lede" data-reveal>
-          A 23-year-old engineering student based in [City], building things
-          at the intersection of engineering and design. I care about how
-          things work — and how they feel.
+          I'm 23, studying engineering, and happiest when something I sketched
+          in a notebook ends up actually working. I split my time between
+          coursework and building for the web — and I sweat the details on both.
         </p>
         <div class="actions" data-reveal>
           <a class="btn btn-primary" href="#work">
@@ -802,21 +803,21 @@
           <span class="marquee-word">Ram</span><span class="marq-dot"></span>
           <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
           <span class="marquee-word">23</span><span class="marq-dot"></span>
-          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Build</span><span class="marq-dot"></span>
           <span class="marquee-word">Ram</span><span class="marq-dot"></span>
           <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
           <span class="marquee-word">23</span><span class="marq-dot"></span>
-          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Build</span><span class="marq-dot"></span>
         </div>
         <div class="marquee-group">
           <span class="marquee-word">Ram</span><span class="marq-dot"></span>
           <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
           <span class="marquee-word">23</span><span class="marq-dot"></span>
-          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Build</span><span class="marq-dot"></span>
           <span class="marquee-word">Ram</span><span class="marq-dot"></span>
           <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
           <span class="marquee-word">23</span><span class="marq-dot"></span>
-          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Build</span><span class="marq-dot"></span>
         </div>
       </div>
     </div>
@@ -825,25 +826,25 @@
       <div class="section-grid">
         <p class="label">About</p>
         <div data-reveal>
-          <h2 class="h2" id="about-title">A little about me.</h2>
+          <h2 class="h2" id="about-title">The longer story.</h2>
           <div class="prose">
             <p>
-              I'm Ram — a 23-year-old engineering student who spends as much
-              time designing and building for the web as I do studying how
-              things work. Projects usually start as a question in class and
-              end up as something I can ship, break, and improve.
+              Engineering taught me to ask how things work; building for the
+              web taught me to care how they feel. Most of what I make starts
+              as a rough sketch and ends up as something I can open in a
+              browser, take apart, and rebuild better.
             </p>
             <p>
-              Outside of coursework you'll find me [hobby], [hobby], or
-              tinkering with [thing]. I like clear thinking, honest work, and
-              making complex things feel simple.
+              I'm still early in this — learning fast, breaking things, and
+              keeping notes. What I lack in years I try to make up for in
+              curiosity and stubbornness.
             </p>
           </div>
           <dl class="facts">
             <div><dt>Currently</dt><dd>Studying engineering</dd></div>
             <div><dt>Age</dt><dd>23</dd></div>
-            <div><dt>Based in</dt><dd>[City], [Country]</dd></div>
-            <div><dt>Focus</dt><dd>Engineering &amp; front-end</dd></div>
+            <div><dt>Focus</dt><dd>Engineering &amp; the web</dd></div>
+            <div><dt>Outside class</dt><dd>Side projects, sketchbooks</dd></div>
           </dl>
         </div>
       </div>
@@ -853,33 +854,33 @@
       <div class="section-grid">
         <p class="label">Selected work</p>
         <div data-reveal>
-          <h2 class="h2" id="work-title">Things I've made.</h2>
+          <h2 class="h2" id="work-title">Recent experiments.</h2>
           <div class="work-list">
             <a class="work-item" href="https://example.com" target="_blank" rel="noopener">
               <span class="work-num">01</span>
               <div>
-                <h3>Northwind</h3>
-                <p>A fresh identity and marketing site for a climate-tech startup.</p>
+                <h3>Pulse</h3>
+                <p>A sensor board that watches a plant's soil and pings your phone before it wilts.</p>
               </div>
-              <span class="work-meta">Branding · Web — 2026</span>
+              <span class="work-meta">Hardware — 2026</span>
               <span class="work-arrow" aria-hidden="true">↗</span>
             </a>
             <a class="work-item" href="https://example.com" target="_blank" rel="noopener">
               <span class="work-num">02</span>
               <div>
-                <h3>Margin</h3>
-                <p>A personal finance app that makes budgeting feel effortless.</p>
+                <h3>Loopline</h3>
+                <p>A focus timer that turns study sessions into a streak you don't want to break.</p>
               </div>
-              <span class="work-meta">Product · iOS — 2025</span>
+              <span class="work-meta">Web app — 2025</span>
               <span class="work-arrow" aria-hidden="true">↗</span>
             </a>
             <a class="work-item" href="https://example.com" target="_blank" rel="noopener">
               <span class="work-num">03</span>
               <div>
-                <h3>Fieldnotes</h3>
-                <p>An editorial platform and design system for a research studio.</p>
+                <h3>Blueprint</h3>
+                <p>A living notebook of diagrams, drawings, and ideas that never quite ended.</p>
               </div>
-              <span class="work-meta">Design system — 2025</span>
+              <span class="work-meta">Notes — 2025</span>
               <span class="work-arrow" aria-hidden="true">↗</span>
             </a>
           </div>
@@ -891,33 +892,33 @@
       <div class="section-grid">
         <p class="label">What I do</p>
         <div data-reveal>
-          <h2 class="h2" id="services-title">How I can help.</h2>
+          <h2 class="h2" id="services-title">What I tinker with.</h2>
           <div class="services">
             <div class="service">
               <span class="num">01</span>
-              <h3>Design</h3>
-              <p>Product and interface design, design systems, and prototyping from first sketch to final spec.</p>
+              <h3>Build</h3>
+              <p>Interfaces in HTML, CSS, JavaScript, and React — made to be fast, accessible, and easy to maintain.</p>
             </div>
             <div class="service">
               <span class="num">02</span>
-              <h3>Build</h3>
-              <p>Front-end development in HTML, CSS, JavaScript and React — fast, accessible, and maintainable.</p>
+              <h3>Tinker</h3>
+              <p>Small electronics and side builds: microcontrollers, sensors, and the occasional failed prototype.</p>
             </div>
             <div class="service">
               <span class="num">03</span>
-              <h3>Direction</h3>
-              <p>Brand identity, art direction, and a coherent visual language across every touchpoint.</p>
+              <h3>Sketch</h3>
+              <p>Diagrams, layouts, and quick prototypes that make an idea clear enough to argue about.</p>
             </div>
           </div>
           <div class="tags" aria-label="Tools and skills">
-            <span class="tag">Figma</span>
+            <span class="tag">HTML &amp; CSS</span>
+            <span class="tag">JavaScript</span>
             <span class="tag">React</span>
-            <span class="tag">TypeScript</span>
-            <span class="tag">Next.js</span>
-            <span class="tag">CSS</span>
-            <span class="tag">Motion</span>
-            <span class="tag">Accessibility</span>
-            <span class="tag">Prototyping</span>
+            <span class="tag">Python</span>
+            <span class="tag">Arduino</span>
+            <span class="tag">Figma</span>
+            <span class="tag">CAD</span>
+            <span class="tag">Git</span>
           </div>
         </div>
       </div>
@@ -927,7 +928,7 @@
       <div class="section-grid">
         <p class="label">Contact</p>
         <div data-reveal>
-          <h2 id="contact-title">Let's build something.</h2>
+          <h2 id="contact-title">Got a half-formed idea?</h2>
           <a class="email" href="mailto:ram@example.com">ram@example.com</a>
           <div class="socials">
             <a href="https://example.com" target="_blank" rel="noopener">Twitter/X <span aria-hidden="true">↗</span></a>
@@ -942,7 +943,7 @@
 
   <footer class="footer">
     <span>© <span id="year">2026</span> Ram. All rights reserved.</span>
-    <span>Made by hand.</span>
+    <span>Sketch, build, break, repeat.</span>
   </footer>
 
   <button class="sound-toggle" type="button" aria-pressed="false">
