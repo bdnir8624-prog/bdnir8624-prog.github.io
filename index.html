@@ -848,6 +848,9 @@
   .intro-dashes { animation: orbit-rev 92s linear infinite; }
   .intro-pulse { animation: pulse 3.4s ease-in-out infinite; }
 
+  .intro-arcs circle,
+  .intro-dashes circle { transition: stroke 0.25s ease; }
+
   .intro-enter { position: relative; z-index: 1; }
   .intro-flash {
     position: absolute;
@@ -855,7 +858,7 @@
     z-index: 2;
     pointer-events: none;
     opacity: 0;
-    background: radial-gradient(circle at 50% 47%, rgba(220, 236, 255, 0.9), rgba(220, 236, 255, 0) 58%);
+    background: radial-gradient(circle at 50% 47%, rgba(217, 255, 160, 0.95), rgba(122, 214, 70, 0.4) 34%, rgba(24, 64, 28, 0) 60%);
   }
   .intro-burst-ring { opacity: 0; }
   .intro-burst circle:not(.intro-burst-ring) {
@@ -875,11 +878,15 @@
     animation: intro-ring-burst 0.8s ease-out forwards;
   }
   .intro.exploding .intro-flash { animation: intro-flash 0.55s ease-out; }
+  .intro.exploding .intro-arcs circle,
+  .intro.exploding .intro-dashes circle { stroke: #9BE24B; }
+  .intro.exploding .intro-pulse { fill: #C8FF7A; }
+  .intro.exploding .intro-mono tspan { fill: #C8FF7A; }
 
   @keyframes intro-mono-burst {
-    0% { opacity: 1; transform: scale(1); }
-    35% { opacity: 1; transform: scale(1.08); }
-    100% { opacity: 0; transform: scale(1.7); }
+    0% { opacity: 1; transform: scale(1); fill: #EAF0FF; }
+    35% { opacity: 1; transform: scale(1.08); fill: #D9FFA6; }
+    100% { opacity: 0; transform: scale(1.7); fill: #9BE24B; }
   }
   @keyframes intro-burst {
     0% { opacity: 0; transform: translate(0, 0) scale(1); }
@@ -896,6 +903,34 @@
     8% { opacity: 0.7; }
     30% { opacity: 0.12; }
     100% { opacity: 0; }
+  }
+
+  .intro.exploding {
+    background:
+      radial-gradient(900px 620px at 50% 47%, rgba(96, 176, 52, 0.32) 0%, rgba(20, 48, 92, 0) 62%),
+      var(--bg);
+  }
+
+  /* Page entrance */
+  @keyframes site-rise {
+    from { opacity: 0; transform: translateY(26px); }
+    to { opacity: 1; transform: none; }
+  }
+  @keyframes site-drop {
+    from { opacity: 0; transform: translateY(-14px); }
+    to { opacity: 1; transform: none; }
+  }
+  .site-entered .nav {
+    animation: site-drop 0.8s cubic-bezier(0.16, 1, 0.3, 1) both;
+  }
+  .site-entered main {
+    animation: site-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.06s both;
+  }
+  .site-entered .footer {
+    animation: site-rise 1s cubic-bezier(0.16, 1, 0.3, 1) 0.2s both;
+  }
+  .site-entered .sound-toggle {
+    animation: site-rise 0.8s cubic-bezier(0.16, 1, 0.3, 1) 0.32s both;
   }
 
   @media (prefers-reduced-motion: reduce) {
@@ -937,7 +972,7 @@
         <text class="intro-mono" x="230" y="244" text-anchor="middle" dominant-baseline="central">N<tspan fill="#8FB8FF">.</tspan></text>
         <text class="intro-label" x="230" y="330" text-anchor="middle">NIRAV · 16 · 10TH CLASS</text>
         <g class="intro-burst">
-          <circle class="intro-burst-ring" cx="230" cy="244" r="28" fill="none" stroke="#DCEBFF" stroke-width="2"/>
+          <circle class="intro-burst-ring" cx="230" cy="244" r="28" fill="none" stroke="#B6FF6A" stroke-width="2"/>
         </g>
       </svg>
       <span class="intro-hint">Click the N to enter</span>
@@ -1208,7 +1243,8 @@
             dot.setAttribute("cx", "230");
             dot.setAttribute("cy", "244");
             dot.setAttribute("r", (2 + Math.random() * 3.2).toFixed(2));
-            dot.setAttribute("fill", Math.random() < 0.55 ? "#EAF0FF" : "#8FB8FF");
+            var greens = ["#D9FFA6", "#B6FF6A", "#9BE24B", "#63C93F"];
+            dot.setAttribute("fill", greens[Math.floor(Math.random() * greens.length)]);
             dot.style.setProperty("--dx", (Math.cos(angle) * distance).toFixed(1) + "px");
             dot.style.setProperty("--dy", (Math.sin(angle) * distance).toFixed(1) + "px");
             dot.style.animationDelay = (Math.random() * 0.08).toFixed(2) + "s";
@@ -1231,6 +1267,7 @@
           window.setTimeout(function () {
             if (!intro) return;
             intro.classList.add("done");
+            document.body.classList.add("site-entered");
             pageParts.forEach(function (el) { el.inert = false; });
             document.body.classList.remove("no-scroll");
             window.setTimeout(function () {
