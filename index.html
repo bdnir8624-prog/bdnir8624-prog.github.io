@@ -1,0 +1,1107 @@
+<!doctype html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Ram — Engineering Student &amp; Designer</title>
+<meta name="description" content="Personal site of Ram — a 23-year-old engineering student who designs and builds things for the web.">
+<meta name="theme-color" content="#081226">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Instrument+Serif:ital@0;1&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet">
+<noscript><style>[data-reveal]{opacity:1 !important;transform:none !important}</style></noscript>
+<style>
+  *, *::before, *::after { box-sizing: border-box; }
+
+  :root {
+    --bg: #081226;
+    --surface: #0C1B33;
+    --ink: #EAF0FF;
+    --ink-soft: #C7D5EF;
+    --muted: #8CA0C6;
+    --line: rgba(148, 178, 235, 0.16);
+    --accent: #8FB8FF;
+    --serif: "Instrument Serif", Georgia, "Times New Roman", serif;
+    --sans: "Inter", -apple-system, BlinkMacSystemFont, "Segoe UI", Helvetica, Arial, sans-serif;
+    --max: 1120px;
+    --pad: clamp(20px, 5vw, 48px);
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    margin: 0;
+    background:
+      radial-gradient(1200px 700px at 78% -12%, #14305C 0%, rgba(20, 48, 92, 0) 62%),
+      var(--bg);
+    color: var(--ink);
+    font-family: var(--sans);
+    font-weight: 400;
+    line-height: 1.6;
+    -webkit-font-smoothing: antialiased;
+    text-rendering: optimizeLegibility;
+  }
+
+  ::selection { background: var(--ink); color: var(--bg); }
+
+  :focus-visible {
+    outline: 2px solid var(--accent);
+    outline-offset: 4px;
+    border-radius: 2px;
+  }
+
+  .skip {
+    position: absolute;
+    left: -9999px;
+    top: 12px;
+    padding: 10px 16px;
+    background: var(--ink);
+    color: var(--bg);
+    border-radius: 999px;
+    font-size: 13px;
+    z-index: 100;
+  }
+  .skip:focus { left: 16px; }
+
+  /* Nav */
+  .nav {
+    position: sticky;
+    top: 0;
+    z-index: 50;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 24px;
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 18px var(--pad);
+    background: color-mix(in srgb, var(--bg) 82%, transparent);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+  }
+
+  .brand {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    color: var(--ink);
+    text-decoration: none;
+  }
+
+  .brand::before {
+    content: "";
+    width: 8px;
+    height: 8px;
+    border-radius: 50%;
+    background: var(--accent);
+  }
+
+  .nav-links {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 2.5vw, 32px);
+  }
+
+  .nav-links a {
+    font-size: 13.5px;
+    color: var(--muted);
+    text-decoration: none;
+    transition: color 0.25s ease;
+  }
+
+  .nav-links a:hover { color: var(--ink); }
+
+  .nav-cta {
+    font-size: 13.5px;
+    font-weight: 500;
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: 2px;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 100% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: color 0.25s ease;
+  }
+  .nav-cta:hover { color: var(--accent); }
+
+  /* Hero */
+  .hero {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(48px, 9vw, 108px) var(--pad) clamp(36px, 6vw, 72px);
+    display: grid;
+    grid-template-columns: minmax(0, 1.12fr) minmax(0, 0.88fr);
+    align-items: center;
+    gap: clamp(32px, 5vw, 64px);
+  }
+
+  .hero-copy { min-width: 0; }
+
+  .eyebrow {
+    display: inline-flex;
+    align-items: center;
+    gap: 9px;
+    font-size: 12px;
+    letter-spacing: 0.14em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  .eyebrow::before {
+    content: "";
+    width: 6px;
+    height: 6px;
+    border-radius: 50%;
+    background: #3E7B4F;
+    box-shadow: 0 0 0 3px rgba(62, 123, 79, 0.12);
+  }
+
+  .hero h1 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(44px, 7.6vw, 98px);
+    line-height: 0.98;
+    letter-spacing: -0.022em;
+    margin: 26px 0 0;
+    max-width: 16ch;
+    overflow-wrap: break-word;
+  }
+
+  .hero h1 em {
+    font-style: italic;
+    color: var(--accent);
+  }
+
+  .lede {
+    max-width: 48ch;
+    font-size: clamp(16px, 1.7vw, 19px);
+    line-height: 1.65;
+    color: var(--muted);
+    margin: 30px 0 0;
+  }
+
+  .actions {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 12px;
+    margin-top: 38px;
+  }
+
+  .btn {
+    display: inline-flex;
+    align-items: center;
+    gap: 10px;
+    padding: 13px 22px;
+    border-radius: 999px;
+    font-size: 14px;
+    font-weight: 500;
+    text-decoration: none;
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1),
+                background 0.25s ease, color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .btn-primary {
+    background: var(--ink);
+    color: var(--bg);
+  }
+  .btn-primary:hover {
+    background: #FFFFFF;
+    transform: translateY(-2px);
+  }
+
+  .btn-ghost {
+    border: 1px solid var(--line);
+    color: var(--ink);
+  }
+  .btn-ghost:hover {
+    border-color: var(--ink);
+    transform: translateY(-2px);
+  }
+
+  .btn .arrow {
+    transition: transform 0.35s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  .btn:hover .arrow { transform: translate(2px, -2px); }
+
+  /* Hero art */
+  .hero-art {
+    justify-self: end;
+    width: 100%;
+    max-width: 430px;
+    aspect-ratio: 1;
+  }
+
+  .hero-art svg {
+    display: block;
+    width: 100%;
+    height: auto;
+    overflow: visible;
+  }
+
+  .art-orbit,
+  .art-dashes,
+  .art-arcs {
+    transform-box: view-box;
+    transform-origin: 50% 50%;
+  }
+
+  .art-plus,
+  .art-pulse {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+
+  .art-orbit { animation: orbit 26s linear infinite; }
+  .art-dashes { animation: orbit-rev 70s linear infinite; }
+  .art-arcs { animation: orbit 44s linear infinite; }
+  .art-plus { animation: float 6s ease-in-out infinite; }
+  .art-plus.p2 { animation-delay: -3s; }
+  .art-pulse {
+    animation: pulse 3.4s ease-out infinite;
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+  }
+
+  .monogram {
+    font-family: var(--serif);
+    font-style: italic;
+    font-size: 176px;
+    fill: #EAF0FF;
+  }
+
+  .art-label {
+    font-family: var(--sans);
+    font-size: 9.5px;
+    letter-spacing: 0.26em;
+    fill: #8CA0C6;
+  }
+
+  .art-orbit circle,
+  .art-pulse {
+    filter: drop-shadow(0 0 6px rgba(143, 184, 255, 0.8));
+  }
+
+  @keyframes orbit { to { transform: rotate(360deg); } }
+  @keyframes orbit-rev { to { transform: rotate(-360deg); } }
+  @keyframes float {
+    0%, 100% { transform: translateY(0); }
+    50% { transform: translateY(-8px); }
+  }
+  @keyframes pulse {
+    0% { transform: scale(1); opacity: 0.9; }
+    70%, 100% { transform: scale(2.8); opacity: 0; }
+  }
+
+  /* Ticker */
+  .marquee {
+    overflow: hidden;
+    border-top: 1px solid var(--line);
+    border-bottom: 1px solid var(--line);
+    padding: clamp(16px, 2.2vw, 24px) 0;
+    -webkit-mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+    mask-image: linear-gradient(to right, transparent 0, #000 7%, #000 93%, transparent 100%);
+  }
+
+  .marquee-track {
+    display: flex;
+    width: max-content;
+    animation: marquee 34s linear infinite;
+  }
+
+  .marquee:hover .marquee-track { animation-play-state: paused; }
+
+  .marquee-group {
+    display: flex;
+    align-items: center;
+    gap: clamp(18px, 3vw, 36px);
+    padding-right: clamp(18px, 3vw, 36px);
+  }
+
+  .marquee-word {
+    font-family: var(--serif);
+    font-size: clamp(30px, 4.6vw, 54px);
+    line-height: 1;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+  }
+
+  .marquee-word.outline {
+    color: transparent;
+    -webkit-text-stroke: 1px #8CA0C6;
+  }
+
+  .marq-dot {
+    width: 7px;
+    height: 7px;
+    border-radius: 50%;
+    background: var(--accent);
+    flex: none;
+    opacity: 0.85;
+  }
+
+  @keyframes marquee { to { transform: translateX(-50%); } }
+
+  /* Sections */
+  .section {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: clamp(52px, 8vw, 96px) var(--pad);
+    border-top: 1px solid var(--line);
+  }
+
+  .section-grid {
+    display: grid;
+    grid-template-columns: 188px minmax(0, 1fr);
+    gap: clamp(24px, 5vw, 64px);
+  }
+
+  .label {
+    font-size: 12px;
+    letter-spacing: 0.16em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin: 6px 0 0;
+  }
+
+  .h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(28px, 3.6vw, 42px);
+    line-height: 1.1;
+    letter-spacing: -0.015em;
+    margin: 0 0 22px;
+  }
+
+  .prose p {
+    max-width: 62ch;
+    font-size: 16.5px;
+    line-height: 1.72;
+    color: var(--ink-soft);
+    margin: 0 0 16px;
+  }
+  .prose p:last-child { margin-bottom: 0; }
+
+  /* Facts */
+  .facts {
+    margin: 38px 0 0;
+    border-top: 1px solid var(--line);
+    max-width: 560px;
+  }
+  .facts > div {
+    display: grid;
+    grid-template-columns: 118px minmax(0, 1fr);
+    gap: 20px;
+    padding: 12px 0;
+    border-bottom: 1px solid var(--line);
+    font-size: 14px;
+  }
+  .facts dt { color: var(--muted); margin: 0; }
+  .facts dd { margin: 0; color: var(--ink-soft); }
+
+  /* Work */
+  .work-list {
+    margin-top: 4px;
+    border-top: 1px solid var(--line);
+  }
+
+  .work-item {
+    display: grid;
+    grid-template-columns: 44px minmax(0, 1fr) auto 22px;
+    align-items: center;
+    gap: clamp(12px, 3vw, 28px);
+    padding: clamp(20px, 3vw, 28px) 0;
+    border-bottom: 1px solid var(--line);
+    text-decoration: none;
+    color: inherit;
+    transition: padding-left 0.4s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+
+  .work-item:hover { padding-left: 12px; }
+
+  .work-num {
+    font-size: 12px;
+    color: var(--muted);
+    font-variant-numeric: tabular-nums;
+  }
+
+  .work-item h3 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(24px, 3.4vw, 33px);
+    line-height: 1.12;
+    letter-spacing: -0.01em;
+    margin: 0;
+  }
+
+  .work-item p {
+    margin: 5px 0 0;
+    font-size: 14px;
+    color: var(--muted);
+    max-width: 46ch;
+  }
+
+  .work-meta {
+    font-size: 12px;
+    color: var(--muted);
+    white-space: nowrap;
+  }
+
+  .work-arrow {
+    font-size: 17px;
+    opacity: 0.35;
+    transition: transform 0.4s cubic-bezier(0.16, 1, 0.3, 1), opacity 0.3s ease;
+  }
+
+  .work-item:hover .work-arrow {
+    transform: translate(3px, -3px);
+    opacity: 1;
+  }
+
+  /* Services */
+  .services {
+    display: grid;
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+    gap: clamp(20px, 4vw, 40px);
+  }
+
+  .service {
+    border-top: 1px solid var(--line);
+    padding-top: 18px;
+  }
+
+  .service .num {
+    display: block;
+    font-size: 11px;
+    letter-spacing: 0.1em;
+    color: var(--muted);
+    margin-bottom: 12px;
+    font-variant-numeric: tabular-nums;
+  }
+
+  .service h3 {
+    font-size: 15px;
+    font-weight: 600;
+    letter-spacing: -0.01em;
+    margin: 0 0 8px;
+  }
+
+  .service p {
+    margin: 0;
+    font-size: 14.5px;
+    line-height: 1.65;
+    color: var(--muted);
+    max-width: 32ch;
+  }
+
+  .tags {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    margin-top: 44px;
+  }
+
+  .tag {
+    font-size: 12.5px;
+    color: var(--muted);
+    border: 1px solid var(--line);
+    border-radius: 999px;
+    padding: 6px 13px;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+  .tag:hover { color: var(--ink); border-color: var(--ink); }
+
+  /* Contact */
+  .contact h2 {
+    font-family: var(--serif);
+    font-weight: 400;
+    font-size: clamp(36px, 6vw, 70px);
+    line-height: 1.02;
+    letter-spacing: -0.02em;
+    margin: 0;
+    max-width: 14ch;
+  }
+
+  .email {
+    display: inline-block;
+    margin-top: 30px;
+    font-family: var(--serif);
+    font-size: clamp(23px, 4vw, 42px);
+    line-height: 1.2;
+    color: var(--ink);
+    text-decoration: none;
+    padding-bottom: 4px;
+    background-image: linear-gradient(currentColor, currentColor);
+    background-size: 0% 1px;
+    background-repeat: no-repeat;
+    background-position: 0 100%;
+    transition: background-size 0.5s cubic-bezier(0.16, 1, 0.3, 1), color 0.3s ease;
+    overflow-wrap: anywhere;
+  }
+
+  .email:hover {
+    background-size: 100% 1px;
+    color: var(--accent);
+  }
+
+  .socials {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 22px;
+    margin-top: 48px;
+  }
+
+  .socials a {
+    font-size: 13px;
+    color: var(--muted);
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    gap: 4px;
+    transition: color 0.25s ease;
+  }
+  .socials a:hover { color: var(--ink); }
+  .socials span { opacity: 0.5; }
+
+  /* Footer */
+  .footer {
+    max-width: var(--max);
+    margin: 0 auto;
+    padding: 28px var(--pad) 42px;
+    border-top: 1px solid var(--line);
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    flex-wrap: wrap;
+    gap: 12px;
+    font-size: 12.5px;
+    color: var(--muted);
+  }
+
+  /* Storm */
+  .storm {
+    position: fixed;
+    inset: 0;
+    z-index: 0;
+    overflow: hidden;
+    pointer-events: none;
+  }
+
+  .flash {
+    position: absolute;
+    inset: 0;
+    opacity: 0;
+    background:
+      radial-gradient(65% 55% at 72% -5%, rgba(165, 205, 255, 0.72), transparent 70%),
+      linear-gradient(180deg, rgba(130, 175, 255, 0.26), transparent 55%);
+  }
+
+  .flash.strike { animation: lightning-flash 1.15s ease-out; }
+
+  .bolt {
+    position: absolute;
+    top: 0;
+    right: 11%;
+    height: clamp(240px, 48vh, 460px);
+    width: auto;
+    opacity: 0;
+    filter: drop-shadow(0 0 18px rgba(195, 220, 255, 0.95));
+  }
+
+  .bolt.strike { animation: bolt-flicker 1.2s ease-out; }
+
+  @keyframes lightning-flash {
+    0% { opacity: 0; }
+    4% { opacity: 0.95; }
+    7% { opacity: 0.22; }
+    11% { opacity: 0.8; }
+    18% { opacity: 0.14; }
+    28% { opacity: 0.55; }
+    100% { opacity: 0; }
+  }
+
+  @keyframes bolt-flicker {
+    0%, 100% { opacity: 0; }
+    3% { opacity: 1; }
+    6% { opacity: 0.15; }
+    9% { opacity: 0.85; }
+    14% { opacity: 0; }
+    24% { opacity: 0.45; }
+    32% { opacity: 0; }
+  }
+
+  main,
+  .marquee,
+  .footer {
+    position: relative;
+    z-index: 1;
+  }
+
+  .sound-toggle {
+    position: fixed;
+    right: 18px;
+    bottom: 18px;
+    z-index: 60;
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    padding: 10px 15px;
+    border-radius: 999px;
+    border: 1px solid var(--line);
+    background: rgba(9, 20, 39, 0.82);
+    -webkit-backdrop-filter: blur(10px);
+    backdrop-filter: blur(10px);
+    color: var(--muted);
+    font-family: var(--sans);
+    font-size: 12.5px;
+    font-weight: 500;
+    cursor: pointer;
+    transition: color 0.25s ease, border-color 0.25s ease;
+  }
+
+  .sound-toggle:hover {
+    color: var(--ink);
+    border-color: #3D5C8F;
+  }
+
+  .sound-toggle[aria-pressed="true"] {
+    color: var(--accent);
+    border-color: rgba(143, 184, 255, 0.45);
+  }
+
+  .sound-icon {
+    width: 14px;
+    height: 14px;
+  }
+
+  /* Reveal */
+  [data-reveal] {
+    opacity: 0;
+    transform: translateY(16px);
+    transition: opacity 0.7s ease, transform 0.8s cubic-bezier(0.16, 1, 0.3, 1);
+  }
+  [data-reveal].in {
+    opacity: 1;
+    transform: none;
+  }
+
+  @media (max-width: 900px) {
+    .hero { grid-template-columns: 1fr; }
+    .hero-art {
+      justify-self: start;
+      max-width: 300px;
+      margin-top: 8px;
+    }
+  }
+
+  @media (max-width: 820px) {
+    .section-grid { grid-template-columns: 1fr; gap: 18px; }
+    .label { margin-top: 0; }
+  }
+
+  @media (max-width: 700px) {
+    .services { grid-template-columns: 1fr; gap: 26px; }
+    .nav-links a:not(.nav-cta) { display: none; }
+    .work-item {
+      grid-template-columns: 30px minmax(0, 1fr) 20px;
+    }
+    .work-meta { display: none; }
+  }
+
+  @media (prefers-reduced-motion: reduce) {
+    html { scroll-behavior: auto; }
+    *, *::before, *::after {
+      transition-duration: 0.01ms !important;
+      animation-duration: 0.01ms !important;
+    }
+    [data-reveal] { opacity: 1; transform: none; }
+    .marquee-track,
+    .art-orbit,
+    .art-dashes,
+    .art-arcs,
+    .art-plus,
+    .art-pulse,
+    .flash,
+    .bolt { animation: none !important; }
+  }
+</style>
+</head>
+<body>
+  <a class="skip" href="#main">Skip to content</a>
+
+  <div class="storm" aria-hidden="true">
+    <div class="flash"></div>
+    <svg class="bolt" viewBox="0 0 120 300" fill="none">
+      <path d="M78 4 L38 128 L66 132 L30 226 L62 228 L26 296" stroke="#DCEBFF" stroke-width="2.4" stroke-linecap="round" stroke-linejoin="round"/>
+      <path d="M66 132 L99 176 L85 179" stroke="#DCEBFF" stroke-width="1.6" stroke-linecap="round" stroke-linejoin="round" opacity="0.8"/>
+      <path d="M38 128 L10 166" stroke="#DCEBFF" stroke-width="1.4" stroke-linecap="round" opacity="0.7"/>
+      <path d="M30 226 L54 258" stroke="#DCEBFF" stroke-width="1.3" stroke-linecap="round" opacity="0.6"/>
+    </svg>
+  </div>
+
+  <header class="nav">
+    <a class="brand" href="#top">Ram</a>
+    <nav class="nav-links" aria-label="Primary">
+      <a href="#about">About</a>
+      <a href="#work">Work</a>
+      <a href="#services">Services</a>
+      <a href="#contact" class="nav-cta">Get in touch</a>
+    </nav>
+  </header>
+
+  <main id="main">
+    <section class="hero" id="top">
+      <div class="hero-copy">
+        <p class="eyebrow" data-reveal>Engineering student · 23</p>
+        <h1 data-reveal>Hi, I'm <em>Ram</em>.</h1>
+        <p class="lede" data-reveal>
+          A 23-year-old engineering student based in [City], building things
+          at the intersection of engineering and design. I care about how
+          things work — and how they feel.
+        </p>
+        <div class="actions" data-reveal>
+          <a class="btn btn-primary" href="#work">
+            See my work <span class="arrow" aria-hidden="true">→</span>
+          </a>
+          <a class="btn btn-ghost" href="#contact">
+            Get in touch <span class="arrow" aria-hidden="true">↗</span>
+          </a>
+        </div>
+      </div>
+
+      <div class="hero-art" data-reveal aria-hidden="true">
+        <svg viewBox="0 0 460 460">
+          <circle cx="230" cy="230" r="206" fill="none" stroke="#2B4878" stroke-width="1"/>
+          <g class="art-arcs">
+            <circle cx="230" cy="230" r="188" fill="none" stroke="#EAF0FF" stroke-opacity="0.18" stroke-width="1.2" stroke-dasharray="160 1021" stroke-linecap="round"/>
+            <circle cx="230" cy="230" r="188" fill="none" stroke="#8FB8FF" stroke-opacity="0.6" stroke-width="1.2" stroke-dasharray="56 1125" stroke-linecap="round" transform="rotate(130 230 230)"/>
+          </g>
+          <g class="art-dashes">
+            <circle cx="230" cy="230" r="160" fill="none" stroke="#8CA0C6" stroke-opacity="0.5" stroke-width="1" stroke-dasharray="1.5 11" stroke-linecap="round"/>
+          </g>
+          <g class="art-orbit">
+            <ellipse cx="230" cy="230" rx="160" ry="54" fill="none" stroke="#8FB8FF" stroke-opacity="0.45" stroke-width="1" transform="rotate(-28 230 230)"/>
+            <circle cx="390" cy="230" r="4.5" fill="#8FB8FF" transform="rotate(-28 230 230)"/>
+          </g>
+          <circle class="art-pulse" cx="230" cy="24" r="4" fill="#8FB8FF"/>
+          <circle cx="230" cy="24" r="3" fill="#8FB8FF"/>
+          <text class="monogram" x="230" y="244" text-anchor="middle" dominant-baseline="central">R<tspan fill="#8FB8FF">.</tspan></text>
+          <text class="art-label" x="230" y="324" text-anchor="middle">RAM · 23 · ENGINEERING</text>
+          <text class="art-plus" x="34" y="72" font-size="18" fill="#8CA0C6" fill-opacity="0.6">+</text>
+          <text class="art-plus p2" x="406" y="404" font-size="18" fill="#8CA0C6" fill-opacity="0.6">+</text>
+        </svg>
+      </div>
+    </section>
+
+    <div class="marquee" aria-hidden="true">
+      <div class="marquee-track">
+        <div class="marquee-group">
+          <span class="marquee-word">Ram</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
+          <span class="marquee-word">23</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+          <span class="marquee-word">Ram</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
+          <span class="marquee-word">23</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+        </div>
+        <div class="marquee-group">
+          <span class="marquee-word">Ram</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
+          <span class="marquee-word">23</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+          <span class="marquee-word">Ram</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Engineering</span><span class="marq-dot"></span>
+          <span class="marquee-word">23</span><span class="marq-dot"></span>
+          <span class="marquee-word outline">Design</span><span class="marq-dot"></span>
+        </div>
+      </div>
+    </div>
+
+    <section class="section" id="about" aria-labelledby="about-title">
+      <div class="section-grid">
+        <p class="label">About</p>
+        <div data-reveal>
+          <h2 class="h2" id="about-title">A little about me.</h2>
+          <div class="prose">
+            <p>
+              I'm Ram — a 23-year-old engineering student who spends as much
+              time designing and building for the web as I do studying how
+              things work. Projects usually start as a question in class and
+              end up as something I can ship, break, and improve.
+            </p>
+            <p>
+              Outside of coursework you'll find me [hobby], [hobby], or
+              tinkering with [thing]. I like clear thinking, honest work, and
+              making complex things feel simple.
+            </p>
+          </div>
+          <dl class="facts">
+            <div><dt>Currently</dt><dd>Studying engineering</dd></div>
+            <div><dt>Age</dt><dd>23</dd></div>
+            <div><dt>Based in</dt><dd>[City], [Country]</dd></div>
+            <div><dt>Focus</dt><dd>Engineering &amp; front-end</dd></div>
+          </dl>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="work" aria-labelledby="work-title">
+      <div class="section-grid">
+        <p class="label">Selected work</p>
+        <div data-reveal>
+          <h2 class="h2" id="work-title">Things I've made.</h2>
+          <div class="work-list">
+            <a class="work-item" href="https://example.com" target="_blank" rel="noopener">
+              <span class="work-num">01</span>
+              <div>
+                <h3>Northwind</h3>
+                <p>A fresh identity and marketing site for a climate-tech startup.</p>
+              </div>
+              <span class="work-meta">Branding · Web — 2026</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="work-item" href="https://example.com" target="_blank" rel="noopener">
+              <span class="work-num">02</span>
+              <div>
+                <h3>Margin</h3>
+                <p>A personal finance app that makes budgeting feel effortless.</p>
+              </div>
+              <span class="work-meta">Product · iOS — 2025</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </a>
+            <a class="work-item" href="https://example.com" target="_blank" rel="noopener">
+              <span class="work-num">03</span>
+              <div>
+                <h3>Fieldnotes</h3>
+                <p>An editorial platform and design system for a research studio.</p>
+              </div>
+              <span class="work-meta">Design system — 2025</span>
+              <span class="work-arrow" aria-hidden="true">↗</span>
+            </a>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section" id="services" aria-labelledby="services-title">
+      <div class="section-grid">
+        <p class="label">What I do</p>
+        <div data-reveal>
+          <h2 class="h2" id="services-title">How I can help.</h2>
+          <div class="services">
+            <div class="service">
+              <span class="num">01</span>
+              <h3>Design</h3>
+              <p>Product and interface design, design systems, and prototyping from first sketch to final spec.</p>
+            </div>
+            <div class="service">
+              <span class="num">02</span>
+              <h3>Build</h3>
+              <p>Front-end development in HTML, CSS, JavaScript and React — fast, accessible, and maintainable.</p>
+            </div>
+            <div class="service">
+              <span class="num">03</span>
+              <h3>Direction</h3>
+              <p>Brand identity, art direction, and a coherent visual language across every touchpoint.</p>
+            </div>
+          </div>
+          <div class="tags" aria-label="Tools and skills">
+            <span class="tag">Figma</span>
+            <span class="tag">React</span>
+            <span class="tag">TypeScript</span>
+            <span class="tag">Next.js</span>
+            <span class="tag">CSS</span>
+            <span class="tag">Motion</span>
+            <span class="tag">Accessibility</span>
+            <span class="tag">Prototyping</span>
+          </div>
+        </div>
+      </div>
+    </section>
+
+    <section class="section contact" id="contact" aria-labelledby="contact-title">
+      <div class="section-grid">
+        <p class="label">Contact</p>
+        <div data-reveal>
+          <h2 id="contact-title">Let's build something.</h2>
+          <a class="email" href="mailto:ram@example.com">ram@example.com</a>
+          <div class="socials">
+            <a href="https://example.com" target="_blank" rel="noopener">Twitter/X <span aria-hidden="true">↗</span></a>
+            <a href="https://example.com" target="_blank" rel="noopener">LinkedIn <span aria-hidden="true">↗</span></a>
+            <a href="https://example.com" target="_blank" rel="noopener">GitHub <span aria-hidden="true">↗</span></a>
+            <a href="https://example.com" target="_blank" rel="noopener">Dribbble <span aria-hidden="true">↗</span></a>
+          </div>
+        </div>
+      </div>
+    </section>
+  </main>
+
+  <footer class="footer">
+    <span>© <span id="year">2026</span> Ram. All rights reserved.</span>
+    <span>Made by hand.</span>
+  </footer>
+
+  <button class="sound-toggle" type="button" aria-pressed="false">
+    <svg class="sound-icon" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.7" stroke-linecap="round" stroke-linejoin="round" aria-hidden="true">
+      <path d="M13 2 5 14h5l-1 8 8-12h-5l1-8Z"/>
+    </svg>
+    <span class="sound-text">Thunder off</span>
+  </button>
+
+  <script>
+    (function () {
+      document.getElementById("year").textContent = new Date().getFullYear();
+
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
+      var items = document.querySelectorAll("[data-reveal]");
+      if (reduceMotion || !("IntersectionObserver" in window)) {
+        items.forEach(function (el) { el.classList.add("in"); });
+      } else {
+        var observer = new IntersectionObserver(function (entries) {
+          entries.forEach(function (entry) {
+            if (entry.isIntersecting) {
+              entry.target.classList.add("in");
+              observer.unobserve(entry.target);
+            }
+          });
+        }, { threshold: 0.12, rootMargin: "0px 0px -40px 0px" });
+
+        items.forEach(function (el, i) {
+          el.style.transitionDelay = Math.min(i % 6, 4) * 55 + "ms";
+          observer.observe(el);
+        });
+      }
+
+      var flash = document.querySelector(".flash");
+      var bolt = document.querySelector(".bolt");
+      var toggle = document.querySelector(".sound-toggle");
+      var toggleText = document.querySelector(".sound-text");
+      var soundOn = false;
+      var audio = null;
+      var timer = null;
+
+      function strike(withSound) {
+        if (!reduceMotion) {
+          [flash, bolt].forEach(function (el) {
+            el.classList.remove("strike");
+            void el.offsetWidth;
+            el.classList.add("strike");
+          });
+        }
+        if (withSound) thunder();
+      }
+
+      function schedule() {
+        window.clearTimeout(timer);
+        timer = window.setTimeout(function () {
+          strike(true);
+          if (Math.random() < 0.45) {
+            window.setTimeout(function () {
+              strike(false);
+              thunder(0.55);
+            }, 1400 + Math.random() * 400);
+          }
+          schedule();
+        }, 3000 + Math.random() * 5000);
+      }
+
+      function audioContext() {
+        if (!audio) {
+          var Ctx = window.AudioContext || window.webkitAudioContext;
+          if (!Ctx) return null;
+          audio = new Ctx();
+          var comp = audio.createDynamicsCompressor();
+          comp.threshold.value = -14;
+          comp.knee.value = 10;
+          comp.ratio.value = 4;
+          comp.attack.value = 0.003;
+          comp.release.value = 0.3;
+          var master = audio.createGain();
+          master.gain.value = 2;
+          comp.connect(master);
+          master.connect(audio.destination);
+          audio.bus = comp;
+        }
+        if (audio.state === "suspended") audio.resume();
+        return audio;
+      }
+
+      function thunder(scale) {
+        if (!soundOn) return;
+        var ac = audioContext();
+        if (!ac) return;
+
+        var level = scale || 1;
+        var sr = ac.sampleRate;
+        var now = ac.currentTime;
+        var dur = 3.2 + Math.random() * 1.4;
+
+        var rumble = ac.createBuffer(1, Math.floor(sr * dur), sr);
+        var data = rumble.getChannelData(0);
+        var last = 0;
+        for (var i = 0; i < data.length; i++) {
+          last = 0.97 * last + 0.03 * (Math.random() * 2 - 1);
+          data[i] = last * 4;
+        }
+        var src = ac.createBufferSource();
+        src.buffer = rumble;
+
+        var lp = ac.createBiquadFilter();
+        lp.type = "lowpass";
+        lp.frequency.value = 170 + Math.random() * 110;
+        lp.Q.value = 0.6;
+
+        var gain = ac.createGain();
+        gain.gain.setValueAtTime(0.0001, now);
+        gain.gain.exponentialRampToValueAtTime(1 * level, now + 0.07);
+        gain.gain.exponentialRampToValueAtTime(0.3 * level, now + 0.5);
+        gain.gain.exponentialRampToValueAtTime(0.72 * level, now + 0.9);
+        gain.gain.exponentialRampToValueAtTime(0.0001, now + dur);
+
+        src.connect(lp);
+        lp.connect(gain);
+        gain.connect(ac.bus);
+        src.start(now);
+
+        var crackDur = 0.16;
+        var crack = ac.createBuffer(1, Math.floor(sr * crackDur), sr);
+        var crackData = crack.getChannelData(0);
+        for (var j = 0; j < crackData.length; j++) {
+          crackData[j] = (Math.random() * 2 - 1) * Math.pow(1 - j / crackData.length, 3);
+        }
+        var crackSrc = ac.createBufferSource();
+        crackSrc.buffer = crack;
+
+        var hp = ac.createBiquadFilter();
+        hp.type = "highpass";
+        hp.frequency.value = 1200;
+
+        var crackGain = ac.createGain();
+        crackGain.gain.value = 0.3 * level;
+
+        crackSrc.connect(hp);
+        hp.connect(crackGain);
+        crackGain.connect(ac.bus);
+        crackSrc.start(now);
+      }
+
+      toggle.addEventListener("click", function () {
+        soundOn = !soundOn;
+        toggle.setAttribute("aria-pressed", String(soundOn));
+        toggleText.textContent = soundOn ? "Thunder on" : "Thunder off";
+        if (soundOn) {
+          audioContext();
+          strike(true);
+        }
+      });
+
+      if (!reduceMotion) schedule();
+    })();
+  </script>
+</body>
+</html>
