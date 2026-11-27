@@ -848,6 +848,56 @@
   .intro-dashes { animation: orbit-rev 92s linear infinite; }
   .intro-pulse { animation: pulse 3.4s ease-in-out infinite; }
 
+  .intro-enter { position: relative; z-index: 1; }
+  .intro-flash {
+    position: absolute;
+    inset: 0;
+    z-index: 2;
+    pointer-events: none;
+    opacity: 0;
+    background: radial-gradient(circle at 50% 47%, rgba(220, 236, 255, 0.9), rgba(220, 236, 255, 0) 58%);
+  }
+  .intro-burst-ring { opacity: 0; }
+  .intro-burst circle:not(.intro-burst-ring) {
+    opacity: 0;
+    animation: intro-burst 0.75s cubic-bezier(0.16, 1, 0.3, 1) forwards;
+  }
+  .intro.exploding .intro-mono {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: intro-mono-burst 0.55s ease-in forwards;
+  }
+  .intro.exploding .intro-hint,
+  .intro.exploding .intro-label { opacity: 0; transition: opacity 0.2s ease; }
+  .intro.exploding .intro-burst-ring {
+    transform-box: fill-box;
+    transform-origin: 50% 50%;
+    animation: intro-ring-burst 0.8s ease-out forwards;
+  }
+  .intro.exploding .intro-flash { animation: intro-flash 0.55s ease-out; }
+
+  @keyframes intro-mono-burst {
+    0% { opacity: 1; transform: scale(1); }
+    35% { opacity: 1; transform: scale(1.08); }
+    100% { opacity: 0; transform: scale(1.7); }
+  }
+  @keyframes intro-burst {
+    0% { opacity: 0; transform: translate(0, 0) scale(1); }
+    12% { opacity: 1; }
+    70% { opacity: 0.9; }
+    100% { opacity: 0; transform: translate(var(--dx), var(--dy)) scale(0.2); }
+  }
+  @keyframes intro-ring-burst {
+    0% { opacity: 0.85; transform: scale(0.3); }
+    100% { opacity: 0; transform: scale(7); }
+  }
+  @keyframes intro-flash {
+    0% { opacity: 0; }
+    8% { opacity: 0.7; }
+    30% { opacity: 0.12; }
+    100% { opacity: 0; }
+  }
+
   @media (prefers-reduced-motion: reduce) {
     html { scroll-behavior: auto; }
     *, *::before, *::after {
@@ -886,9 +936,13 @@
         <circle class="intro-pulse" cx="230" cy="24" r="4" fill="#8FB8FF"/>
         <text class="intro-mono" x="230" y="244" text-anchor="middle" dominant-baseline="central">N<tspan fill="#8FB8FF">.</tspan></text>
         <text class="intro-label" x="230" y="330" text-anchor="middle">NIRAV · 16 · 10TH CLASS</text>
+        <g class="intro-burst">
+          <circle class="intro-burst-ring" cx="230" cy="244" r="28" fill="none" stroke="#DCEBFF" stroke-width="2"/>
+        </g>
       </svg>
       <span class="intro-hint">Click the N to enter</span>
     </button>
+    <div class="intro-flash" aria-hidden="true"></div>
   </div>
 
   <div class="storm" aria-hidden="true">
@@ -1129,23 +1183,51 @@
     (function () {
       document.getElementById("year").textContent = new Date().getFullYear();
 
+      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+
       var intro = document.getElementById("intro");
       if (intro) {
         var introButton = intro.querySelector(".intro-enter");
+        var burstLayer = intro.querySelector(".intro-burst");
+        var svgNS = "http://www.w3.org/2000/svg";
         var pageParts = document.querySelectorAll(".skip, .nav, main, .footer, .sound-toggle");
+
         document.body.classList.add("no-scroll");
         pageParts.forEach(function (el) { el.inert = true; });
         introButton.focus({ preventScroll: true });
 
+        var spawnBurst = function () {
+          if (reduceMotion) return;
+          for (var i = 0; i < 40; i++) {
+            var angle = (Math.PI * 2 * i) / 40 + Math.random() * 0.22;
+            var distance = 110 + Math.random() * 140;
+            var dot = document.createElementNS(svgNS, "circle");
+            dot.setAttribute("cx", "230");
+            dot.setAttribute("cy", "244");
+            dot.setAttribute("r", (2 + Math.random() * 3.2).toFixed(2));
+            dot.setAttribute("fill", Math.random() < 0.55 ? "#EAF0FF" : "#8FB8FF");
+            dot.style.setProperty("--dx", (Math.cos(angle) * distance).toFixed(1) + "px");
+            dot.style.setProperty("--dy", (Math.sin(angle) * distance).toFixed(1) + "px");
+            dot.style.animationDelay = (Math.random() * 0.08).toFixed(2) + "s";
+            burstLayer.appendChild(dot);
+          }
+        };
+
         var enterSite = function () {
-          if (!intro || intro.classList.contains("done")) return;
-          intro.classList.add("done");
-          pageParts.forEach(function (el) { el.inert = false; });
-          document.body.classList.remove("no-scroll");
+          if (!intro || intro.classList.contains("done") || intro.classList.contains("exploding")) return;
+          intro.classList.add("exploding");
+          spawnBurst();
+
           window.setTimeout(function () {
-            if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
-            intro = null;
-          }, 700);
+            if (!intro) return;
+            intro.classList.add("done");
+            pageParts.forEach(function (el) { el.inert = false; });
+            document.body.classList.remove("no-scroll");
+            window.setTimeout(function () {
+              if (intro && intro.parentNode) intro.parentNode.removeChild(intro);
+              intro = null;
+            }, reduceMotion ? 40 : 700);
+          }, reduceMotion ? 0 : 520);
         };
 
         intro.addEventListener("click", enterSite);
@@ -1155,8 +1237,6 @@
           }
         });
       }
-
-      var reduceMotion = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
 
       var items = document.querySelectorAll("[data-reveal]");
       if (reduceMotion || !("IntersectionObserver" in window)) {
